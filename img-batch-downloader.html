@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Image Batch Downloader</title>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1','packages':['corechart'], 'language': 'zh' }]}"></script>
+
+    <script type="text/javascript" src="js/show_url_img_table.js"></script>
+    <script type="text/javascript" src="js/build_url_components.js"></script>
+
+    <style type="text/css">
+        @import url(css/default.css);
+    </style>
+</head>
+<body>
+    <div id="divUpperContainer">
+        <div id="divFunctions">
+            目標網址：<br>
+            <input type="textbox" id="urlTarget" size="256" value="http://magikan.games-ent.com/d_magikan/img/card/base400/card_10 ##,0,16,l _ #,0,3 .png"><br>
+        </div>
+    </div>
+    <br>
+    <div id="divContentContainer">
+        <div>
+            <table border="1">
+                <tbody id="tableUrlImg">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script type="text/javascript">
+        urlComponents = buildUrlComponents(document.getElementById("urlTarget").value);
+        showUrlImgTable(urlComponents);
+    </script>
+</body>
+</html>
