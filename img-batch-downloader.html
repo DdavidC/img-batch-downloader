@@ -21,7 +21,8 @@
     <div id="divUpperContainer">
         <div id="divFunctions">
             目標網址：<br>
-            <input type="textbox" id="urlTarget" size="256" value="http://magikan.games-ent.com/d_magikan/img/card/base400/card_10 ##,0,16,l _ #,0,3 .png"><br>
+            <input type="textbox" id="urlTarget" size="256" value="http://magikan.games-ent.com/d_magikan/img/card/base400/card_10 ##,1,16,l _ #,0,3 .png"><br>
+            <input type="button" value="批次處理開始" onclick="startBatchProcess()">
         </div>
     </div>
     <br>
@@ -29,13 +30,18 @@
         <div>
             <table border="1">
                 <tbody id="tableUrlImg">
+                    <tr><td>網址</td><td>圖片（按Ctrl-右鍵下載）</td></tr>
                 </tbody>
             </table>
         </div>
     </div>
+
     <script type="text/javascript">
-        urlComponents = buildUrlComponents(document.getElementById("urlTarget").value);
-        showUrlImgTable(urlComponents);
+        function startBatchProcess()
+        {
+            urlComponents = buildUrlComponents(document.getElementById("urlTarget").value);
+            showUrlImgTable(urlComponents);
+        }
     </script>
 </body>
 </html>

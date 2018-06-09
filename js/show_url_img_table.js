@@ -6,7 +6,7 @@ function showUrlImgTable(urlComponents)
     tableUrlImg.innerHTML = "";
 
     // Row 0: Table title
-    NewRow = "<tr><td>網址</td><td>圖片</td></tr>";
+    NewRow = "";
     $("#tableUrlImg").append(NewRow);
 
     stackPointer = 0;
@@ -14,23 +14,17 @@ function showUrlImgTable(urlComponents)
     {
         if(stackPointer == urlComponents.length)
         {
-            NewRow = "<tr>";
-
-            NewRow += "<td>";
+            var newUrl = "";
             for(var i = 0; i < urlComponents.length; i++)
             {
-                NewRow += urlComponents[i].urlText;
+                newUrl += urlComponents[i].urlText;
             }
-            NewRow += "</td>";
 
-            NewRow += "<td><img src=\""
-            for(var i = 0; i < urlComponents.length; i++)
-            {
-                NewRow += urlComponents[i].urlText;
-            }
-            NewRow += "\"></td>";
-            
+            NewRow = "<tr>"
+            NewRow += "<td>" + newUrl + "</td>";
+            NewRow += "<td><a href=\"" + newUrl + "\" target=\"_blank\" download><img src=\"" + newUrl + "\" /></a></td>";
             NewRow += "</tr>";
+
             $("#tableUrlImg").append(NewRow);
 
             stackPointer--;
@@ -39,44 +33,63 @@ function showUrlImgTable(urlComponents)
 
         switch(urlComponents[stackPointer].class)
         {
+            // Const
             case "const":
-                if(urlComponents[stackPointer].value == 0)
+                if(urlComponents[stackPointer].pointer)
                 {
-                    urlComponents[stackPointer].value = 1;
+                    urlComponents[stackPointer].pointer = false;
                     stackPointer++;
                 }
                 else
                 {
-                    urlComponents[stackPointer].value = 0;
+                    urlComponents[stackPointer].pointer = true;
                     stackPointer--;
                 }
 
                 break;
 
+            // Number
             case "num":
-                if(urlComponents[stackPointer].value < urlComponents[stackPointer].end)
+                if(urlComponents[stackPointer].pointer <= urlComponents[stackPointer].end)
                 {
-                    urlComponents[stackPointer].value++;
                     if(urlComponents[stackPointer].paddingLeft)
                     {
                         urlComponents[stackPointer].urlText = 
-                            paddingLeftZero(urlComponents[stackPointer].value.toString(), urlComponents[stackPointer].paddingLength);
+                            paddingLeftZero(urlComponents[stackPointer].pointer.toString(), urlComponents[stackPointer].paddingLength);
                     }
                     else
                     {
-                        urlComponents[stackPointer].urlText = urlComponents[stackPointer].value.toString();
+                        urlComponents[stackPointer].urlText = urlComponents[stackPointer].pointer.toString();
                     }
+                    urlComponents[stackPointer].pointer += urlComponents[stackPointer].step;
                     stackPointer++;
                 }
                 else
                 {
-                    urlComponents[stackPointer].value = urlComponents[stackPointer].start - 1;
+                    urlComponents[stackPointer].pointer = urlComponents[stackPointer].start;
                     stackPointer--;
                 }
+
+                break;
+
+            // Enum
+            case "enum":
+                if(urlComponents[stackPointer].pointer < urlComponents[stackPointer].enum.length)
+                {
+                    urlComponents[stackPointer].urlText = urlComponents[stackPointer].enum[urlComponents[stackPointer].pointer];
+                    urlComponents[stackPointer].pointer++;
+                    stackPointer++;
+                }
+                else
+                {
+                    urlComponents[stackPointer].pointer = 0;
+                    stackPointer--;
+                }
+
                 break;
         }
 
-        if(stackPointer < 0)
+        if(stackPointer <= 0)
         {
             break;
         }
