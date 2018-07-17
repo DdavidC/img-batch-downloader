@@ -3,7 +3,7 @@ function showUrlImgTable(urlComponents)
     var tableUrlImg = document.getElementById("tableUrlImg");
     var NewRow;
 
-    tableUrlImg.innerHTML = "";
+    // tableUrlImg.innerHTML = "";
 
     // Row 0: Table title
     NewRow = "";
