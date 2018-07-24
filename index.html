@@ -24,6 +24,12 @@
             <input type="textbox" id="urlTarget" size="256" value="http://magikan.games-ent.com/d_magikan/img/card/base400/card_10 ##,1,16,l _ #,0,3 .png"><br>
             <input type="button" value="批次處理開始" onclick="startBatchProcess()">
         </div>
+        <div>
+            簡單說明：<br>
+            以空格切分批次內容的區塊，區塊有以下類別：<br>
+            1. 數值：#,StartRange,EndRange[,[l][,StepValue]]
+            2. 列舉：@,PossibleText1[,PossibleText2[,PossibleText3[,...]]]
+        </div>
     </div>
     <br>
     <div id="divContentContainer">
