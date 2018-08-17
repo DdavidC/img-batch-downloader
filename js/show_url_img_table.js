@@ -3,7 +3,7 @@ function showUrlImgTable(urlComponents)
     var tableUrlImg = document.getElementById("tableUrlImg");
     var NewRow;
 
-    // tableUrlImg.innerHTML = "";
+    tableUrlImg.innerHTML = "<tr><td>網址</td><td>圖片（按Ctrl-左鍵下載）</td></tr>";
 
     // Row 0: Table title
     NewRow = "";
